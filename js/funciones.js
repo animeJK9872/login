@@ -11,7 +11,7 @@ function recuperar() {
   if (usuario === "" || password === "") {
     datos = "No puedes dejar campos en blanco";
   } else {
-    datos = 'Usuario: ' + usuario + '<br>Contraseña: ' + password + '<br>';
+    datos = 'Usuario:<br> ' + usuario + '<br>Contraseña: ' + password + '<br>';
   }
 
   document.getElementById("mensaje").innerHTML = datos;
@@ -45,15 +45,15 @@ function agregarConcepto(contenedor) {
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-1 g-lg-4">
     <div class="col">
     <button type="button" class="btn btn-danger btn-sm eliminar">X</button>
-    <label class="ms-2">Cantidad:</label>
+    <label class="ms-2">Cantidad:</label><br>
     <input type="number" value="1" class="cantidad form-control d-inline-block w-auto">
     </div>
     <div class="col">
-    <label class="ms-2">Descripción:</label>
+    <label class="ms-2">Descripción:</label><br>
     <input type="text" placeholder="Descripción" class="descripcion form-control d-inline-block w-auto">
     </div>
     <div class="col">
-    <label class="ms-2">Valor Unitario:</label>
+    <label class="ms-2">Valor Unitario:</label><br>
     <input type="number" value="0" class="valorUnitario form-control d-inline-block w-auto">
     </div>
     <div class="col">
