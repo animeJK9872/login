@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="Bostrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="Bostrap/css/styleñs.css">
+	<title>Login</title>
+</head>
+<body class="bg-info">
+
+	<div class="d-flex align-items-center justify-content-center">
+	<div class="card shadow p-4" style="width: 22rem; margin-top: 50px;">
+		<h3 class="text-center mb-3">Inicio de sesion</h3>
+		<form action="" id="loginform">
+			<div class="mb-3">
+				<label for="usuario" class="form-label">Usario:</label>
+				<input type="text" id="usuario" class="form-label" placeholder="Ingresa tu usuario" required>
+			</div>
+
+			<div class="mb-3">
+				<label for="clave" class="form-label">Contraseña:</label>
+				<input type="password" id="clave" class="form-label" placeholder="Introsuce la contraseña" required>
+			</div>
+			<div class="mb-3">
+				<label for="clave" class="form-label">Conceptos:</label>
+				<input type="number" id="numConceptos" class="form-label" placeholder="Introsuce un numero" required>
+			</div>
+			<button type="button" class="btn btn-primary w-100" id="btnLog" onclick="recuperar()">Ingresar</button>
+			<p id="mensaje" class="text-center mt-3 text-danger"></p>
+			</form>
+		</div>
+		</div>
+
+		<div class="d-flex align-items-center justify-content-center" style="margin-top:50px;">
+		<div class="mb-3">	
+			<h3 class="text-center mb-3">Conceptos:</h3>
+<div id="contenedorConceptos"></div>
+
+</div>
+
+</div>
+
+			
+<script src="Js/funciones.js"></script>
+</body>
+</html>
