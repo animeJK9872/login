@@ -11,7 +11,7 @@ function recuperar() {
   if (usuario === "" || password === "") {
     datos = "No puedes dejar campos en blanco";
   } else {
-    datos = 'Usuario:<br> ' + usuario + '<br>Contraseña: ' + password + '<br>';
+    datos = '<br>Usuario: ' + usuario + '<br>Contraseña: ' + password + '<br>';
   }
 
   document.getElementById("mensaje").innerHTML = datos;
