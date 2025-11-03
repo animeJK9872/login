@@ -4,6 +4,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="Bostrap/css/bootstrap.min.css">
+	<style>
+    .totals-box {
+      display: none; /* Oculto hasta que haya conceptos */
+    }
+  </style>
 	<title>Login</title>
 </head>
 <body class="bg-info">
@@ -34,13 +39,32 @@
 		<div class="d-flex align-items-center justify-content-center" style="margin-top:50px;">
 		<div class="mb-3">	
 			<h3 class="text-center mb-3">Conceptos:</h3>
-<div id="contenedorConceptos"></div>
+      <div id="contenedorConceptos"></div>
+    </div>
+  </div>
 
-</div>
+  <!-- Caja de totales (oculta al inicio) -->
+  <div class="d-flex align-items-center justify-content-center mt-3">
+    <div class="col-md-4 totals-box p-3 bg-light rounded shadow">
+      <div class="row mb-2">
+        <div class="col-6 text-end"><strong>Subtotal:</strong></div>
+        <div class="col-6"><input type="text" class="form-control text-end" id="subtotalDisplay" value="0.00" readonly></div>
+      </div>
 
-</div>
+      <div class="row mb-2">
+        <div class="col-6 text-end"><strong>IVA (16%):</strong></div>
+        <div class="col-6"><input type="text" class="form-control text-end" id="ivaDisplay" value="0.00" readonly></div>
+      </div>
 
-			
-<script src="js/funciones.js"></script>
+      <div class="row">
+        <div class="col-6 text-end"><strong>Total:</strong></div>
+        <div class="col-6"><input type="text" class="form-control text-end" id="totalDisplay" value="0.00" readonly></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Archivo JS externo -->
+  <script src="js/funciones.js"></script>
+
 </body>
 </html>
