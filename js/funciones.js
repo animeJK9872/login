@@ -1,4 +1,3 @@
-
 function recuperar() {
   const contenedor = document.getElementById('contenedorConceptos');
   contenedor.innerHTML = '';
@@ -17,7 +16,13 @@ function recuperar() {
 
   document.getElementById("mensaje").innerHTML = datos;
 
-  for (let i = 0; i < cantidad; i++) {
+  // que no sean negativos 
+  if (isNaN(cantidad) || cantidad <= 0) {
+    alert("Ingresa un número válido de conceptos (solo enteros positivos)");//alerta por numero no correctos
+    return;
+  }
+
+  for (let i = 0; i < cantidad; i++) {//recorido para poner todos los conceptod
     agregarConcepto(contenedor);
   }
 
@@ -30,15 +35,15 @@ function recuperar() {
     btnAgregar.addEventListener('click', () => {
       agregarConcepto(contenedor);
       mostrarElementos();
-    });
-    contenedor.parentNode.appendChild(btnAgregar);
+    });      //padre elemt
+    contenedor.parentNode.appendChild(btnAgregar);//agrega el boton en el conetedor
   }
 
   mostrarElementos();
   actualizarTotales();
 }
 
-function agregarConcepto(contenedor) {
+function agregarConcepto(contenedor) {//contiene el contendo de los conceptos
   const div = document.createElement('div');
   div.className = 'concepto mt-2 p-2 border rounded';
   div.innerHTML = `
@@ -46,7 +51,7 @@ function agregarConcepto(contenedor) {
       <div class="col">
         <button type="button" class="btn btn-danger btn-sm eliminar">X</button>
         <label class="ms-2">Cantidad:</label><br>
-        <input type="number" value="1" class="cantidad form-control d-inline-block w-auto">
+        <input type="number" value="1" min="0" step="1" class="cantidad form-control d-inline-block w-auto">
       </div>
       <div class="col">
         <label class="ms-2">Descripción:</label><br>
@@ -54,7 +59,7 @@ function agregarConcepto(contenedor) {
       </div>
       <div class="col">
         <label class="ms-2">Valor Unitario:</label><br>
-        <input type="number" value="0" class="valorUnitario form-control d-inline-block w-auto">
+        <input type="number" value="0" min="0" step="1" class="valorUnitario form-control d-inline-block w-auto">
       </div>
       <div class="col">
         <label class="ms-2">Importe:</label><br>
@@ -63,24 +68,29 @@ function agregarConcepto(contenedor) {
     </div>
   `;
 
-  contenedor.appendChild(div);
+  contenedor.appendChild(div);//nuevo elemto en el div
 
-  const btnEliminar = div.querySelector('.eliminar');
+  const btnEliminar = div.querySelector('.eliminar');//elimina conceptos
   btnEliminar.addEventListener('click', () => {
     div.remove();
     mostrarElementos();
     actualizarTotales();
   });
-
+//selecionan un valor dentro de algo especifico
   const cantidadInput = div.querySelector('.cantidad');
   const valorInput = div.querySelector('.valorUnitario');
   const importeInput = div.querySelector('.importe');
 
   const recalcular = () => {
+    // Evita negativos o decimales
+    cantidadInput.value = Math.max(0, Math.floor(Number(cantidadInput.value) || 0));
+    valorInput.value = Math.max(0, Math.floor(Number(valorInput.value) || 0));
+
     importeInput.value = (cantidadInput.value * valorInput.value).toFixed(2);
     actualizarTotales();
   };
 
+    //cuando pase sierta cosa llama a una funcion
   cantidadInput.addEventListener('input', recalcular);
   valorInput.addEventListener('input', recalcular);
 
@@ -91,11 +101,10 @@ function agregarConcepto(contenedor) {
 function mostrarElementos() {
   const contenedor = document.getElementById('contenedorConceptos');
   const btnAgregar = document.getElementById('btnAgregar');
-  const cajaTotales = document.querySelector('.totals-box');
+  const cajaTotales = document.querySelector('.totals-box');//elprimer elemento con esa clase
 
   if (!cajaTotales) return;
 
-  // Oculta o muestra la caja de totales y el botón "Agregar concepto"
   if (contenedor.children.length === 0) {
     if (btnAgregar) btnAgregar.style.display = 'none';
     cajaTotales.style.display = 'none';
@@ -106,22 +115,21 @@ function mostrarElementos() {
 }
 
 function actualizarTotales() {
-  const conceptos = document.querySelectorAll('.concepto');
+  const conceptos = document.querySelectorAll('.concepto');//seleciona todos los .concepto en la pagina 
   let subtotal = 0;
 
   conceptos.forEach(concepto => {
     const importe = parseFloat(concepto.querySelector('.importe').value) || 0;
     subtotal += importe;
   });
-
-  const iva = subtotal * 0.16; // 16% de IVA
+//iva es 0.16 y es una costante
+  const iva = subtotal * 0.16;
   const total = subtotal + iva;
 
   document.getElementById('subtotalDisplay').value = subtotal.toFixed(2);
   document.getElementById('ivaDisplay').value = iva.toFixed(2);
   document.getElementById('totalDisplay').value = total.toFixed(2);
 
-  // Oculta o muestra la caja según haya conceptos
   const cajaTotales = document.querySelector('.totals-box');
   if (conceptos.length > 0) {
     cajaTotales.style.display = 'block';
